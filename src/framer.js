@@ -10,7 +10,7 @@ const Framer = {
   append:{
     head:{
       style : () => {
-        const style = `<style type="text/css">div{transition:all ${this.transitionDelay}s}</style>`;
+        const style = `<style type="text/css">div{transition:all ${Framer.transitionDelay}s}</style>`;
         $('head').append(style);
       }
     }
