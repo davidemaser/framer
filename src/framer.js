@@ -2,16 +2,26 @@
  * Created by David Maser on 30/05/2017.
  */
 
-const jsonSrc = './data/framer.json';
+const jsonSrc = `./data/framer.json`;
 const Framer = {
   intervals:[],
   animateNode:'div',
+  transitionDelay: 0.5,
+  animationLoop:false,
+  append:{
+    head:{
+      style : () => {
+        const style = `<style type="text/css">div{transition:all ${Framer.transitionDelay}s}</style>`;
+        $('head').append(style);
+      }
+    }
+  },
   run(data){
     const frames = data['frames'];
-    let f;
-    for(f in frames){
-      this.intervals.push(frames[f].keys);
-    }
+    frames.map((obj) => {
+      this.intervals.push(obj.keys);
+      }
+    );
   },
   animate(){
     let i = 0;
@@ -20,13 +30,16 @@ const Framer = {
       let framePosition = this.intervals[i];
       let frameOffset = parseInt(Object.keys(framePosition));
       let frameParams = {};
-      //console.log(i,framePosition,frameOffset);
-      $.each(framePosition[frameOffset],function(a,b){
+      $.each(framePosition[frameOffset],(a,b)=>{
         frameParams[a] = b;
       });
-      let styleObj = JSON.stringify(frameParams).replace(/"/g,'').replace(/,/g,';').replace(/{/g,'').replace(/}/g,'')
-      console.log(i,JSON.stringify(frameParams).replace(/"/g,'').replace(/,/g,';').replace(/{/g,'').replace(/}/g,''));
-      $(this.animateNode).attr('style',styleObj,function(){});
+      let styleObj = JSON.stringify(frameParams).
+        replace(/"/g,'').
+        replace(/,/g,';').
+        replace(/{/g,'').
+        replace(/}/g,'');
+      console.log(i,frameParams);
+      $(this.animateNode).attr('style',styleObj);
       $(this.animateNode).animate({
         opacity:'1'
       },frameOffset,function(){
@@ -46,7 +59,7 @@ const Framer = {
     $.ajax({
       url:jsonSrc,
       success:(data)=>{
-        $.when(this.run(data)).then(this.animate());
+        $.when(this.run(data)).then(this.append.head.style()).then(this.animate());
       },
       error:()=>{
         this.fail(true)
@@ -54,6 +67,6 @@ const Framer = {
     })
   }
 };
-$(function(){
+$(()=>{
 Framer.getSrc();
 });

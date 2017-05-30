@@ -2,14 +2,26 @@
   "name": "framer",
   "version": "0.5.1",
   "description": "Framer is a jQuery keyframe manager",
-  "main": "index.js",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/davidemaser/framer.git"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "webpack":"webpack"
+  },
+  "babel": {
+    "ignore": [
+      "webpack.config.js",
+      "bundle.js"
+    ],
+    "presets": ["env"]
   },
   "author": "David Maser",
   "license": "MIT",
   "devDependencies": {
     "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.5.1"
+    "babel-preset-env": "^1.5.1",
+    "webpack": "^2.6.1"
   }
 }
