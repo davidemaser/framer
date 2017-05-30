@@ -9,5 +9,9 @@ module.exports = {
   },
   module: {
     loaders: []
+  },
+  externals: {
+    jquery: 'jQuery',
+    $: 'jQuery'
   }
 };

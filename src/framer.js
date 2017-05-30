@@ -11,7 +11,7 @@ const Framer = {
   append:{
     head:{
       style : () => {
-        const style = `<style type="text/css">div{transition:all ${Framer.transitionDelay}s}</style>`;
+        const style = `<style type="text/css">div{transition:all ${this.transitionDelay}s}</style>`;
         $('head').append(style);
       }
     }
@@ -19,38 +19,40 @@ const Framer = {
   run(data){
     const frames = data['frames'];
     frames.map((obj) => {
-      this.intervals.push(obj.keys);
+      this.intervals.push(obj.key);
       }
     );
   },
   animate(){
     let i = 0;
     let frameLoop = this.intervals.length-1;
-    let processIntervals = () => {
-      let framePosition = this.intervals[i];
-      let frameOffset = parseInt(Object.keys(framePosition));
-      let frameParams = {};
-      $.each(framePosition[frameOffset],(a,b)=>{
-        frameParams[a] = b;
-      });
-      let styleObj = JSON.stringify(frameParams).
-        replace(/"/g,'').
-        replace(/,/g,';').
-        replace(/{/g,'').
-        replace(/}/g,'');
-      console.log(i,frameParams);
-      $(this.animateNode).attr('style',styleObj);
-      $(this.animateNode).animate({
-        opacity:'1'
-      },frameOffset,function(){
-        i++;
-        i <= frameLoop ? processIntervals() : null;
-      });
+    let processIntervals = (reset) => {
+      if (reset === true) {
+        i = 0;
+        $(this.animateNode).attr('style', '');
+        this.exit();
+      } else {
+        let framePosition = this.intervals[i];
+        let frameOffset = parseInt(Object.keys(framePosition));
+        let frameParams = {};
+        $.each(framePosition[frameOffset], (a, b) => {
+          frameParams[a] = b;
+        });
+        let styleObj = JSON.stringify(frameParams).replace(/"/g, '').replace(/,/g, ';').replace(/{/g, '').replace(/}/g, '');
+        console.log(i, frameParams);
+        $(this.animateNode).attr('style', styleObj);
+        $(this.animateNode).animate({
+          opacity: '1'
+        }, frameOffset, function () {
+          i <= frameLoop ? processIntervals() : null;
+          i++;
+        });
+      }
     };
     processIntervals();
   },
   exit(){
-    this.remove();
+    //this.remove();
   },
   fail(silent){
     silent === true ? this.exit() : this.getSrc();
@@ -67,6 +69,11 @@ const Framer = {
     })
   }
 };
+export default class FrameHandler{
+  constructor(){
+    Framer.getSrc();
+  }
+}
 $(()=>{
-Framer.getSrc();
+new FrameHandler();
 });

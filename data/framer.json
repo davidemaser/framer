@@ -1,7 +1,7 @@
 {
   "frames":[
     {
-      "keys":{
+      "key":{
         "5000":{
           "margin-left":"10px",
           "background-color":"red",
@@ -10,11 +10,31 @@
       }
     },
     {
-      "keys":{
-        "10000":{
+      "key":{
+        "4000":{
           "margin-left":"80px",
           "background-color":"green",
           "transform":"rotate(360deg)"
+        }
+      }
+    },
+    {
+      "key":{
+        "2000":{
+          "margin-left":"-50px",
+          "background-color":"blue",
+          "transform":"rotate(0deg)",
+          "width":"200px"
+        }
+      }
+    },
+    {
+      "key":{
+        "1000":{
+          "position":"absolute",
+          "left":"500px",
+          "width":"400px",
+          "font-size":"60px"
         }
       }
     }
