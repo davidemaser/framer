@@ -1,7 +1,6 @@
 /**
  * Created by David Maser on 30/05/2017.
  */
-
 const jsonSrc = `./data/framer.json`;
 const Framer = {
   intervals:[],
@@ -52,10 +51,10 @@ const Framer = {
     processIntervals();
   },
   exit(){
-    //this.remove();
+    return;
   },
   fail(silent){
-    silent === true ? this.exit() : this.getSrc();
+    silent === true ? this.getSrc() : this.exit();
   },
   getSrc(){
     $.ajax({

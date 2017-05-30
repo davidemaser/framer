@@ -13,7 +13,9 @@
   "babel": {
     "ignore": [
       "webpack.config.js",
-      "bundle.js"
+      "bundle.js",
+      "framer.js",
+      "app.js"
     ],
     "presets": ["env"]
   },
