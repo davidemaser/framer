@@ -38,7 +38,6 @@ const Framer = {
           frameParams[a] = b;
         });
         let styleObj = JSON.stringify(frameParams).replace(/"/g, '').replace(/,/g, ';').replace(/{/g, '').replace(/}/g, '');
-        console.log(i, frameParams);
         $(this.animateNode).attr('style', styleObj);
         $(this.animateNode).animate({
           opacity: '1'
