@@ -1,0 +1,22 @@
+{
+  "frames":[
+    {
+      "keys":{
+        "5000":{
+          "margin-left":"10px",
+          "background-color":"red",
+          "transform":"rotate(90deg)"
+        }
+      }
+    },
+    {
+      "keys":{
+        "10000":{
+          "margin-left":"80px",
+          "background-color":"green",
+          "transform":"rotate(360deg)"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "framer",
+  "version": "0.5.1",
+  "description": "Framer is a jQuery keyframe manager",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Maser",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.5.1"
+  }
+}
